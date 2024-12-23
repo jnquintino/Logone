@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <h:outputScript name="https://code.jquery.com/jquery-3.6.0.min.js" target="head" />
+        <title>Cadastro de Vagas</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="inicio" value="Data de Início:" />
+                <p:calendar id="inicio" value="#{vagaBean.inicio}" pattern="dd/MM/yyyy"/>
+
+                <h:outputLabel for="fim" value="Data de Término:" />
+                <p:calendar id="fim" value="#{vagaBean.fim}" required="true" />
+
+                <h:outputLabel for="quantidade" value="Quantidade de Vagas:" />
+                <p:inputText id="quantidade" value="#{vagaBean.quantidade}" required="true" />
+            </h:panelGrid>
+
+            <p:commandButton value="Salvar" action="#{vagaBean.salvarVaga}" update="vagasTable" />
+        </h:form>
+
+        <h:panelGrid columns="1" cellpadding="5">
+            <h:outputText value="Vagas cadastradas:" style="font-weight: bold;" />
+            <p:dataTable id="vagasTable" value="#{vagaBean.vagas}" var="vaga">
+                <p:column headerText="Data de Início">
+                    <h:outputText value="#{vaga.inicio}" />
+                </p:column>
+                <p:column headerText="Data de Término">
+                    <h:outputText value="#{vaga.fim}" />
+                </p:column>
+                <p:column headerText="Quantidade de Vagas">
+                    <h:outputText value="#{vaga.quantidade}" />
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+
+        <h:form>
+            <p:commandButton value="Voltar" onclick="window.history.back();" type="button" />
+        </h:form>
+    </h:body>
+</ui:composition>
